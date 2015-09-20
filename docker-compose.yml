@@ -1,0 +1,17 @@
+
+db:
+  build: ../db  # path to database dockerfile
+  volumes:
+    - ../db/mysql:/var/lib/mysql  # path to database volume (ie. data)
+
+web:
+  build: .
+  # command: /usr/local/bin/uwsgi --emperor /etc/uwsgi/vassals --uid www-data --gid www-data
+  volumes:
+   - .:/code
+  ports:
+    - "80:80"
+    - "433:433"
+    - "8000:8000"
+  links:
+    - db
