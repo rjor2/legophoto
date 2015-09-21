@@ -20,6 +20,7 @@ RUN mkdir /etc/uwsgi
 RUN mkdir /etc/uwsgi/vassals
 # symlink from the default config directory to your config file
 RUN ln -s /code/app_uwsgi.ini /etc/uwsgi/vassals/
+RUN mkdir /var/log/uwsgi
 ########################################################################################################################
 
 ########################################################################################################################
@@ -37,5 +38,7 @@ ADD app/requirements.txt /code/app/
 RUN pip install -r app/requirements.txt
 ADD . /code/
 ########################################################################################################################
+
+RUN mkdir /var/log/django
 
 cmd ["supervisord", "-n"]
